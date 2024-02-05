@@ -1,0 +1,563 @@
+---
+title: 'A1 - Preproceso de datos'
+author: "Autor: Eduardo Mora González"
+date: "octubre 2022"
+output:
+  html_document:
+    highlight: default
+    number_sections: yes
+    theme: cosmo
+    toc: yes
+    toc_depth: 2
+    includes:
+      in_header: 75.584-PEC-header.html
+  pdf_document:
+    highlight: zenburn
+    toc: yes
+  word_document: default
+---
+
+<style>
+body {
+text-align: justify}
+
+```{r message= FALSE, warning=FALSE}
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+```
+
+# Carga del archivo
+
+Lo primero que hacemos es cargar el fichero:
+</style>
+```{r}
+ library(readr)
+ fichero <- read_csv("C:/Users/eduar/Dropbox/ESTUDIOS/Estadística avanzada/PEC1/gpa_row.csv")
+```
+
+Una vez cargado el fichero, la salida nos da el numero de variables que hay de cada tipo (numéricas que hay 4, lógicas que hay 4 o texto que hay 2), pero ahora vamos a ver si los datos que tenemos están dentro de los parámetros correspondientes, según se especifica en el enunciado.
+
+```{r}
+summary(fichero)
+```
+Tras ver las estadísticas básicas de las variables, nos damos cuenta de lo siguiente:
+
+ **Variables numéricas** --> son: sat, hsrank, hsperc, colgpa. Las variables tothrs y hsize también son de tipo numérica pero R las ha interpretado como Strings.
+ 
+ **Variables lógicas** --> son: athlete, female, white y black. Estas si han sido interpretadas de manera correcta.
+ 
+
+# Normalización de las variables cualitativas
+
+## Athlete
+
+Presentamos el contenido de la variable
+
+```{r}
+head(fichero$athlete)
+```
+
+Comprobamos el tipo de variable que es
+
+```{r}
+class(fichero$athlete)
+```
+
+Quitamos los espcacios y lo ponemos en mayusculas todo
+
+```{r}
+fichero$athlete <- toupper(fichero$athlete)
+fichero$athlete <- gsub(" ", "",fichero$athlete)
+class(fichero$athlete)
+```
+
+
+Cambiamos a variable factor y lo comprobamos
+ 
+```{r}
+fichero$athlete<- as.factor(fichero$athlete)
+head(fichero$athlete)
+class(fichero$athlete)
+```
+
+## Female
+
+Presentamos el contenido de la variable
+
+```{r}
+head(fichero$female)
+```
+
+Comprobamos el tipo de variable que es
+
+```{r}
+class(fichero$female)
+```
+
+Quitamos los espacios y lo ponemos en mayusculas todo
+
+```{r}
+fichero$female <- toupper(fichero$female)
+fichero$female <- gsub(" ", "",fichero$female)
+class(fichero$female)
+```
+
+Cambiamos a variable factor y lo comprobamos
+ 
+```{r}
+fichero$female<- as.factor(fichero$female)
+head(fichero$female)
+class(fichero$female)
+```
+
+## Black
+
+Presentamos el contenido de la variable
+
+```{r}
+head(fichero$black)
+```
+
+Comprobamos el tipo de variable que es
+
+```{r}
+class(fichero$black)
+```
+
+Quitamos los espacios y lo ponemos en mayusculas todo
+
+```{r}
+fichero$black <- toupper(fichero$black)
+fichero$black <- gsub(" ", "",fichero$black)
+class(fichero$black)
+```
+
+
+Cambiamos a variable factor y lo comprobamos
+ 
+```{r}
+fichero$black<- as.factor(fichero$black)
+head(fichero$black)
+class(fichero$black)
+```
+
+## White
+
+Presentamos el contenido de la variable
+
+```{r}
+head(fichero$white)
+```
+
+Comprobamos el tipo de variable que es
+
+```{r}
+class(fichero$white)
+```
+
+Quitamos los espacios y lo ponemos en mayusculas todo
+
+```{r}
+fichero$black <- toupper(fichero$black)
+fichero$black <- gsub(" ", "",fichero$black)
+class(fichero$black)
+```
+
+Cambiamos a variable factor y lo comprobamos
+ 
+```{r}
+fichero$white<- as.factor(fichero$white)
+head(fichero$white)
+class(fichero$white)
+```
+
+# Normalización de las variables cuantitativas
+
+## Nota de acceso
+
+Presentamos el contenido de la variable
+
+```{r}
+head(fichero$sat)
+```
+
+Comprobamos el tipo de variable que es
+
+```{r}
+class(fichero$sat)
+```
+
+La variable se adapta a la normalización deseada.
+
+## Horas totales cursadas al semestre
+
+Presentamos el contenido de la variable
+
+```{r}
+head(fichero$tothrs)
+```
+
+Comprobamos el tipo de variable que es
+
+```{r}
+class(fichero$tothrs)
+```
+
+Debemos quitar la “h” final y convertir la variable en numérica
+
+```{r}
+library(stringr)
+
+fichero$tothrs <- str_replace (fichero$tothrs, "h", "")
+head(fichero$tothrs)
+fichero$tothrs <- as.numeric(fichero$tothrs)
+```
+
+Comprobamos el tipo de variable que es
+
+```{r}
+class(fichero$tothrs)
+```
+
+Ahora la variable se adapta a la normalización deseada.
+
+## Nota media del estudiante al final del primer semestre
+
+Presentamos el contenido de la variable
+
+```{r}
+head(fichero$colgpa)
+```
+
+Comprobamos el tipo de variable que es
+
+```{r}
+class(fichero$colgpa)
+```
+
+La variable se adapta a la normalización deseada.
+
+
+## Número total de estudiants en la cohorte de graduados del bachillerato
+
+Presentamos el contenido de la variable
+
+```{r}
+head(fichero$hsize)
+```
+
+Comprobamos el tipo de variable que es
+
+```{r}
+class(fichero$hsize)
+```
+
+Debemos convertir la variable en numérica
+
+```{r}
+library(stringr)
+
+fichero$hsize <- str_replace (fichero$hsize, ",", ".")
+head(fichero$hsize)
+
+fichero$hsize <- as.numeric(fichero$hsize)
+
+```
+
+Comprobamos el tipo de variable que es
+
+```{r}
+class(fichero$hsize)
+```
+
+Ahora la variable se adapta a la normalización deseada.
+
+## Ranking relativo del estudiante
+
+Presentamos el contenido de la variable
+
+```{r}
+head(fichero$hsperc)
+```
+
+Comprobamos el tipo de variable que es
+
+```{r}
+class(fichero$hsperc)
+```
+
+Truncamos los decimales que tienen a solo 3:
+
+```{r}
+fichero$hsperc <- signif(fichero$hsperc,  digits =3)
+head(fichero$hsperc)
+```
+
+La variable se adapta a la normalización deseada.
+
+# Valores atípicos
+
+Vemos una vez normalizadas las variables, en que rango se encuentran y si están dentro de lo deseado.
+
+```{r}
+summary(fichero)
+```
+
+La variable **tothrs**` y **hsrank** está dentro de los parámetros normales.
+
+La variable **colgpa** está en escala de 0 a 4 puntos, por lo que está de forma correcta. Además esta variable tiene 41 campos nulos.
+
+Para la variable **hsperc** se va a comprobar si el cálculo se ha hecho de manera correcta, para ello se comprueba si son iguales los valores, si no se sustituye, y se cuenta los distintos. Finalmente se muestra el número de errores que ha tenido los datos.
+
+```{r}
+distintos = 0
+
+for(i in 1: length(fichero$hsperc)){
+  
+  calculo <- signif((fichero$hsrank[i] / fichero$hsize[i]),  digits =3)
+  
+  iguales <- identical(calculo, fichero$hsperc[i])
+  
+  
+  if(iguales==FALSE){
+    fichero$hsperc[i]<-calculo
+    distintos = distintos + 1
+  }
+  
+}
+
+distintos
+```
+
+Para la variable  **hsize** nos damos cuenta de que esta dentro de los rangos, pero tiene valores atípicos, como se puede comprobar en el boxplot siguiente:
+
+```{r}
+boxplot(fichero$hsize)
+
+# Points
+stripchart(fichero$hsize,              # Data
+           method = "jitter", # Random noise
+           pch = 1,          # Pch symbols
+           col = 4,           # Color of the symbol
+           vertical = TRUE,   # Vertical mode
+           add = TRUE)        # Add it over
+
+```
+
+La variable **SAT** está en escala de 400 a 1600 puntos, pero tiene valores atípicos, como se puede comprobar en el boxplot siguiente:
+
+
+```{r}
+boxplot(fichero$sat)
+
+# Points
+stripchart(fichero$sat,              # Data
+           method = "jitter", # Random noise
+           pch = 1,          # Pch symbols
+           col = 4,           # Color of the symbol
+           vertical = TRUE,   # Vertical mode
+           add = TRUE)        # Add it over
+
+```
+
+# Imputación de valores
+
+Lo primero que vamos a hacer es dividir los registros entre hombre y mujer
+
+```{r}
+
+fichero_mujer  <- fichero
+fichero_mujer  <- fichero_mujer [fichero_mujer$female == TRUE ,]
+fichero_hombre <- fichero
+fichero_hombre <- fichero_hombre[fichero_hombre$female == FALSE ,]
+
+summary(fichero_hombre$colgpa)
+summary(fichero_mujer$colgpa)
+```
+
+Comprobamos que para los hombres hay 24 nulos y para las mujeres 17. 
+
+Hacemos la imputación para las mujeres, lo mostramos y los añadimos a la lista de mujeres
+
+```{r}
+
+library(VIM)
+imputacion_mujer <- kNN(fichero_mujer, k=11)
+
+imputacion_mujer$colgpa[imputacion_mujer$colgpa_imp=='TRUE']
+
+fichero_mujer$colgpa <- imputacion_mujer$colgpa
+
+summary(fichero_mujer$colgpa)
+
+```
+
+Hacemos la imputación para los hombres, lo mostramos y los añadimos a la lista de hombres
+
+```{r}
+
+library(VIM)
+imputacion_hombre <- kNN(fichero_hombre, k=11)
+
+imputacion_hombre$colgpa[imputacion_hombre$colgpa_imp=='TRUE']
+
+fichero_hombre$colgpa <- imputacion_hombre$colgpa
+
+summary(fichero_hombre$colgpa)
+
+```
+
+Unimos las dos listas con los datos ya imputados.
+
+```{r}
+fichero_2 <- rbind(fichero_hombre, fichero_mujer)
+summary(fichero_2)
+```
+
+# Creación de una nueva variable
+
+Con la calificación dada, se asigna el valor de la variable categórica. Se ha establecido los intervalos para cada letra según el enunciado.
+
+```{r}
+fichero_2["gpaletter"] <- cut(fichero_2$colgpa, breaks = c(-0.01,1.49,2.49,3.49,4), labels = c("D", "C", "B", "A"))
+
+head(fichero_2)
+
+tail(fichero_2)
+```
+
+# Estudio descriptivo
+
+## Estudio descriptivo de las variables cualitativas
+
+### Athlete en porcentaje de atletas
+
+```{r}
+tabla1 <- table(fichero_2$athlete)
+tabla1 <- prop.table(tabla1)
+
+xx <- barplot(tabla1, ylim=c(0,1.1), xlab='¿Athlete?', ylab='Frecuencia', las=1)
+text(x=xx, y=tabla1, pos=3, cex=0.8, col="red", label=round(tabla1, 4))
+```
+
+Como se puede ver, hay un mayor número de personas que no practican deporte respecto a las que si las practican.
+
+### Athlete en porcentaje de atletas en función del sexo
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+
+tabla2 <- table(fichero_2$female, fichero_2$athlete)
+tabla2 <- prop.table(tabla2)
+valores <- c("HOMBRE", "MUJER")
+
+barplot(tabla2, beside = TRUE, las=1, 
+        xlab='athlete', ylab='Frecuencia',
+        col = c("lightblue", "mistyrose"),
+        ylim = c(0,1))
+legend('topleft', legend=valores, bty='n',
+       fill=c("lightblue", "mistyrose"))
+
+```
+A nivel visual se puede ver, que los hombres hacen mas deporte que las mujeres.
+
+## Estudio descriptivo de las variables cuantitativas
+
+### Estudio descriptivo de las variables cuantitativas “sat”, “tothrs”, “hsize”, “hsrank”.
+
+Se va a generar histogramas para verificar la distribución de las variables numéricas
+
+```{r}
+library(purrr)
+library(tidyr)
+library(ggplot2)
+
+fichero_2 %>%
+  keep(is.numeric) %>% 
+  gather() %>% 
+  ggplot(aes(value)) +
+    facet_wrap(~ key, scales = "free") +
+    geom_histogram(col="red",
+                   fill="green",
+                   alpha = 0.5,) +
+    ggtitle("Distribuciones de las variables numéricas")
+```
+
+### Distribución de los valores de "sat"
+
+```{r}
+boxplot(fichero_2$sat)
+```
+### Distribución de los valores de "sat" por sexo
+
+```{r message= FALSE, warning=FALSE}
+ggplot(fichero_2, aes(x=sat, y=female, fill=sat)) + 
+  geom_boxplot()+
+  labs(title="Plot of Sex per sat",x="sat", y = "¿FEMALE?")
+
+```
+
+### Tabla con diversas medidas de tendencia central y dispersión, robustas y no robustas.
+
+```{r}
+Cabecera <- c("Estimadores","sat", "tothrs", "hsize", "hsrank" )
+sat <- c(mean(fichero_2$sat),median(fichero_2$sat),mean(fichero_2$sat,trim=0.05),sd(fichero_2$sat),IQR(fichero_2$sat), mad(fichero_2$sat) )
+tothrs <- c(mean(fichero_2$tothrs),median(fichero_2$tothrs),mean(fichero_2$tothrs,trim=0.05),sd(fichero_2$tothrs),IQR(fichero_2$tothrs), mad(fichero_2$tothrs) )
+hsize<- c(mean(fichero_2$hsize),median(fichero_2$hsize),mean(fichero_2$hsize,trim=0.05),sd(fichero_2$hsize),IQR(fichero_2$hsize), mad(fichero_2$hsize) )
+hsrank<- c(mean(fichero_2$hsrank),median(fichero_2$hsrank),mean(fichero_2$hsrank,trim=0.05),sd(fichero_2$hsrank),IQR(fichero_2$hsrank), mad(fichero_2$hsrank) )
+Estimadores <- c("Media", "Mediana","Media recortada","Desviación estándar","RIC","DAM")
+
+tabla_medidas <- data.frame(
+  "Estimadores" = Estimadores, 
+  "sat" = sat,
+  "tothrs" = tothrs,
+  "hsize" = hsize,
+  "hsrank" = hsrank
+)
+
+tabla_medidas
+
+```
+
+# Archivo final 
+
+```{r}
+   head(fichero_2)
+   write.csv(fichero_2, file = "gpa_clean.csv")
+```
+
+# Informe ejecutivo
+
+## Tabla resumen del preprocesamiento
+
+| Variable | Línea de Código | Observaciones|
+|:-:|:-:|:---|
+|  | | n. filas = 4137; n. columnas = 10; n. var num.= 6; n. var. qualit = 4 |
+|Athelte| 53, 59, 65-67, 74-76 | Para la variable athelte se ha comprobado el tipo de variable que es, una vez comprobado se ha puesto en mayúsculas y se ha quitado los espacios, convirtiendo ahora la variable en “carácter”. Finalmente se ha factorizado la variable.|
+|Female|84, 90, 96-98, 104-106 | Para la variable Female se ha comprobado el tipo de variable que es, una vez comprobado se ha puesto en mayúsculas y se ha quitado los espacios, convirtiendo ahora la variable en “carácter”. Finalmente se ha factorizado la variable.|
+|Black|114,120,126-128,135-137 |Para la variable Black se ha comprobado el tipo de variable que es, una vez comprobado se ha puesto en mayúsculas y se ha quitado los espacios, convirtiendo ahora la variable en “carácter”. Finalmente se ha factorizado la variable. |
+|White|145, 151, 157-159, 165-167 |Para la variable White se ha comprobado el tipo de variable que es, una vez comprobado se ha puesto en mayúsculas y se ha quitado los espacios, convirtiendo ahora la variable en “carácter”. Finalmente se ha factorizado la variable. |
+|Sat| 177, 183, 347-356| Vemos si la variable Sat se adapta a la normalización deseada. Finalmente se comprueba que, aunque está dentro de la normalización deseada, tiene valores atípicos |
+|Tothrs| 193, 199, 205-209, 215| Vemos el tipo de variable que es Tothrs, al ser de tipo String debemos quitarle el carácter ‘h’ que tiene al final y convertirlo a numérico|
+|Colgpa| 255, 231, 365-371, 380-387| Vemos si la variable Colgpa se adapta a la normalización deseada. Para los valores nulos se divide el fichero por la variable Female, y se imputan los valores nulos con KNN|
+|Hsize| 242, 248, 254-259, 266, 331-340| Para la variable hsize inicialmente es del tipo “Charater”, por lo que se le remplaza la coma por el punto y se cambia a tipo numérico para obtener la normalización deseada. Finalmente se comprueba que, aunque está dentro de la normalización deseada, tiene valores atípicos|
+| Hsperc| 276, 282, 288-289, 309-323| Para la variable Hsperc se comprueba el tipo y se trunca los decimales a 3. Para los valores nulos, se hace el cálculo de la división con las otras dos variables implicadas, se comprueba dicho calculo y se inserta los valores que faltaban |
+|Gpaletter| 418-422| Se crea una variable nueva llamada Gpaletter según el valor de la variable colgpa, estableciendo el límite inferior en -0.01 para que coja el numero 0 dentro del conjunto|
+|  |  | n. filas = 4137; n. columnas = 11; n. var num.= 6; n. var. qualit = 5 |
+
+
+## Resumen estadístico
+
+
+A nivel general, y tras realizar un estudio sobre el conjunto de datos, podemos observar que muchas variables están relacionadas entre sí, ya que unas dependen de las otras, o simplemente son un calculo o división de conjuntos de la otra.
+
+Inicialmente, podemos ver la variable **ColgPa** nos muestra que el mayor numero de los estudiantes están entre el 2 y el 3, habiendo a su vez una cantidad mayor de mejores calificaciones (superiores a 3) que peores calificaciones (inferior a 2). Para complementar la variable anterior, se ha creado la variable **gpaletter**, en la cual se obtiene a partir de las calificaciones obtenidas, y se dividen en varios intervalos.
+
+Por otro lado, tenemos la variable **hsperc** muestra el ranking relativo de los estudiantes, el valor de esta variable depende de la variable ** hsrank** que es el ranking de los estudiantes, donde se puede observar que el grueso de estudiantes del dataset están entre los 100 primeros puntos del ranking. También la variable **hsperc** depende de la variable **hsize** la cual nos dice el porcentaje de graduados, en donde el mayor pico de estudiantes esta un ~2,5% (lo que seria 250 estudiantes). 
+La variable **Sat** aunque siempre se ha encontrado dentro de los rangos, ha tenido datos atípicos, en el sentido de que existen datos muy cerca de los límites, y bastantes datos alejado de la media.
+
+De la variable **tothrs** hay que comentar solo que el mayor grupo de estudiantes del dataset han realizado entre unas 25 horas y el siguiente mayor grupo unas 50 horas totales cursadas en el semestre.
+
+Si cambiamos las tornas a las variables cualitativas, nos damos cuenta de que hay más hombres que mujeres tal y como se indica en la variable **Female**, que hay un numero bajo de deportistas en la universidad como indica la variable **Athlete** y que hay un número de personas que no son ni Blancas ni Negras, según la variables ** White** y ** black**, ya que la proporción de valores afirmativos y negativos no coinciden.
+
+Además, comparando las variables como se ha hecho en el estudio descriptivo, nos damos cuenta de que la nota media **Sat** de los hombres es mas alta que la de las mujeres.
+

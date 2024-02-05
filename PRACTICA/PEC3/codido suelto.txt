@@ -1,0 +1,7 @@
+cols_number <- c("id", "Age", "Distance", "Seat_comfort", "Food_drink", "Gate", "Wifi", "Ent", "Ease_booking", "Service", "Baggage_handling", "Checkin_service", "Cleanliness", "Online_boarding", "Departure_Delay", "Arrival_Delay")
+
+for(j in cols_number){
+  datos_limpios[,j] <- as.numeric(datos_limpios[,j])
+}
+
+str(datos_limpios)

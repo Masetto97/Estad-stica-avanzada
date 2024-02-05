@@ -1,0 +1,1437 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{48,48,48}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.81,0.69}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.50,0.62,0.50}{\textbf{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.80,0.80,0.80}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.86,0.64,0.64}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.80,0.80,0.80}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.86,0.64,0.64}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.50,0.62,0.50}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.50,0.62,0.50}{\textbf{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.86,0.64,0.64}{\textbf{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.94,0.87,0.69}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.87,0.87,0.75}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.86,0.86,0.80}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.50,0.62,0.50}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.76,0.75,0.62}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.80,0.80,0.80}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.75,0.75,0.82}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.94,0.94,0.56}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.80,0.80,0.80}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.50,0.62,0.50}{\textbf{#1}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.94,0.87,0.69}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.80,0.80,0.80}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.94,0.94,0.82}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.94,0.94,0.56}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{1.00,0.81,0.69}{\textbf{#1}}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.80,0.80,0.80}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.86,0.64,0.64}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.80,0.58,0.58}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.80,0.58,0.58}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.80,0.80,0.80}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.80,0.58,0.58}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.50,0.62,0.50}{\textbf{#1}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={A2 - Analítica descriptiva e inferencial},
+  pdfauthor={Autor: Eduardo Mora González},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{A2 - Analítica descriptiva e inferencial}
+\author{Autor: Eduardo Mora González}
+\date{Noviembre 2022}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{library}\NormalTok{(readr)}
+\NormalTok{ gpa }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"C:/Users/eduar/Dropbox/ESTUDIOS/Estadística avanzada/PEC2/gpa\_clean.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 4137 Columns: 11
+\end{verbatim}
+
+\begin{verbatim}
+## -- Column specification ---------------------------------------------------------------------------------------------------------------------
+## Delimiter: ","
+## chr (1): gpaletter
+## dbl (6): sat, tothrs, hsize, hsrank, hsperc, colgpa
+## lgl (4): athlete, female, white, black
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Numero de campos, registros y tipos las variables}
+\FunctionTok{str}\NormalTok{(gpa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## spec_tbl_df [4,137 x 11] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ sat      : num [1:4137] 920 1170 810 940 1180 980 880 980 1240 1230 ...
+##  $ tothrs   : num [1:4137] 43 18 14 40 18 114 78 55 18 17 ...
+##  $ hsize    : num [1:4137] 0.1 9.4 1.19 5.71 2.14 ...
+##  $ hsrank   : num [1:4137] 4 191 42 252 86 41 161 101 161 3 ...
+##  $ hsperc   : num [1:4137] 40 20.3 35.3 44.1 40.2 ...
+##  $ colgpa   : num [1:4137] 2.04 4 1.78 2.42 2.61 ...
+##  $ athlete  : logi [1:4137] TRUE FALSE TRUE FALSE FALSE FALSE ...
+##  $ female   : logi [1:4137] TRUE FALSE FALSE FALSE FALSE TRUE ...
+##  $ white    : logi [1:4137] FALSE TRUE TRUE TRUE TRUE TRUE ...
+##  $ black    : logi [1:4137] FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ gpaletter: chr [1:4137] "C" "A" "C" "C" ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   sat = col_double(),
+##   ..   tothrs = col_double(),
+##   ..   hsize = col_double(),
+##   ..   hsrank = col_double(),
+##   ..   hsperc = col_double(),
+##   ..   colgpa = col_double(),
+##   ..   athlete = col_logical(),
+##   ..   female = col_logical(),
+##   ..   white = col_logical(),
+##   ..   black = col_logical(),
+##   ..   gpaletter = col_character()
+##   .. )
+##  - attr(*, "problems")=<externalptr>
+\end{verbatim}
+
+\hypertarget{estaduxedstica-descriptiva-y-visualizaciuxf3n}{%
+\section{Estadística descriptiva y
+visualización}\label{estaduxedstica-descriptiva-y-visualizaciuxf3n}}
+
+\hypertarget{anuxe1lisis-descriptivo}{%
+\subsection{Análisis descriptivo}\label{anuxe1lisis-descriptivo}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Análisis descriptivo básico de las variables}
+\FunctionTok{summary}\NormalTok{(gpa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       sat           tothrs           hsize          hsrank           hsperc            colgpa       athlete          female       
+##  Min.   : 470   Min.   :  6.00   Min.   :0.03   Min.   :  1.00   Min.   : 0.1667   Min.   :0.000   Mode :logical   Mode :logical  
+##  1st Qu.: 940   1st Qu.: 17.00   1st Qu.:1.65   1st Qu.: 11.00   1st Qu.: 6.4328   1st Qu.:2.210   FALSE:3943      FALSE:2277     
+##  Median :1030   Median : 47.00   Median :2.51   Median : 30.00   Median :14.5833   Median :2.660   TRUE :194       TRUE :1860     
+##  Mean   :1030   Mean   : 52.83   Mean   :2.80   Mean   : 52.83   Mean   :19.2371   Mean   :2.654                                  
+##  3rd Qu.:1120   3rd Qu.: 80.00   3rd Qu.:3.68   3rd Qu.: 70.00   3rd Qu.:27.7108   3rd Qu.:3.120                                  
+##  Max.   :1540   Max.   :137.00   Max.   :9.40   Max.   :634.00   Max.   :92.0000   Max.   :4.000                                  
+##    white           black          gpaletter        
+##  Mode :logical   Mode :logical   Length:4137       
+##  FALSE:308       FALSE:3908      Class :character  
+##  TRUE :3829      TRUE :229       Mode  :character  
+##                                                    
+##                                                    
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Dimensiones}
+\FunctionTok{dim}\NormalTok{(gpa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4137   11
+\end{verbatim}
+
+\hypertarget{visualizaciuxf3n}{%
+\subsection{Visualización}\label{visualizaciuxf3n}}
+
+\hypertarget{distribuciuxf3n-de-las-variables-sat-y-colgpa}{%
+\subsubsection{Distribución de las variables 'sat` y
+'colgpa`}\label{distribuciuxf3n-de-las-variables-sat-y-colgpa}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{sat,}\AttributeTok{col=}\StringTok{"lightsalmon"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Histograma Variable SAT"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{sat,}\AttributeTok{col=}\StringTok{"lightsalmon"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Diagrama de Caja Variable SAT"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-4-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{sat,}\AttributeTok{col=}\StringTok{"lightsalmon"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Diagrama de Caja Variable SAT con los valores"}\NormalTok{)}
+
+\CommentTok{\# Points}
+\FunctionTok{stripchart}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{sat,             }
+           \AttributeTok{method =} \StringTok{"jitter"}\NormalTok{, }
+           \AttributeTok{pch =} \DecValTok{1}\NormalTok{,         }
+           \AttributeTok{col =} \DecValTok{4}\NormalTok{,          }
+           \AttributeTok{vertical =} \ConstantTok{TRUE}\NormalTok{,  }
+           \AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)    }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-4-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{colgpa,}\AttributeTok{col=}\StringTok{"lightsalmon"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Histograma Variable colgpa"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{colgpa,}\AttributeTok{col=}\StringTok{"lightsalmon"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Diagrama de Caja Variable colgpa"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-5-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{colgpa,}\AttributeTok{col=}\StringTok{"lightsalmon"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Diagrama de Caja Variable colgpa con los valores"}\NormalTok{)}
+
+\CommentTok{\# Points}
+\FunctionTok{stripchart}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{colgpa,             }
+           \AttributeTok{method =} \StringTok{"jitter"}\NormalTok{, }
+           \AttributeTok{pch =} \DecValTok{1}\NormalTok{,         }
+           \AttributeTok{col =} \DecValTok{4}\NormalTok{,          }
+           \AttributeTok{vertical =} \ConstantTok{TRUE}\NormalTok{,  }
+           \AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)    }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-5-3.pdf}
+
+\hypertarget{distribuciuxf3n-de-la-variable-sat-con-respecto-a-la-variable-guxe9nero-female-la-variable-atleta-athlete-y-la-raza-white-black}{%
+\subsubsection{Distribución de la variable 'sat` con respecto a la
+variable género ('female`), la variable atleta ('athlete`) y la raza
+('white`,
+'black`)}\label{distribuciuxf3n-de-la-variable-sat-con-respecto-a-la-variable-guxe9nero-female-la-variable-atleta-athlete-y-la-raza-white-black}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Sum1 }\OtherTok{\textless{}{-}} \FunctionTok{summarize}\NormalTok{( }\FunctionTok{group\_by}\NormalTok{(gpa, female), }\AttributeTok{n=}\FunctionTok{length}\NormalTok{(female), }\AttributeTok{sat=}\FunctionTok{mean}\NormalTok{(sat))}
+\NormalTok{Sum2 }\OtherTok{\textless{}{-}} \FunctionTok{summarize}\NormalTok{( }\FunctionTok{group\_by}\NormalTok{(gpa, athlete), }\AttributeTok{n=}\FunctionTok{length}\NormalTok{(athlete), }\AttributeTok{sat=}\FunctionTok{mean}\NormalTok{(sat))}
+\NormalTok{Sum3 }\OtherTok{\textless{}{-}} \FunctionTok{summarize}\NormalTok{( }\FunctionTok{group\_by}\NormalTok{(gpa, white), }\AttributeTok{n=}\FunctionTok{length}\NormalTok{(white), }\AttributeTok{sat=}\FunctionTok{mean}\NormalTok{(sat))}
+\NormalTok{Sum4 }\OtherTok{\textless{}{-}} \FunctionTok{summarize}\NormalTok{( }\FunctionTok{group\_by}\NormalTok{(gpa, black), }\AttributeTok{n=}\FunctionTok{length}\NormalTok{(black), }\AttributeTok{sat=}\FunctionTok{mean}\NormalTok{(sat))}
+\NormalTok{g1 }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{( Sum1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{female, }\AttributeTok{y=}\NormalTok{sat, }\AttributeTok{fill=}\NormalTok{female)) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{width =} \DecValTok{1}\NormalTok{, }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{)}
+\NormalTok{g2 }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{( Sum2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{athlete, }\AttributeTok{y=}\NormalTok{sat, }\AttributeTok{fill=}\NormalTok{athlete)) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{width =} \DecValTok{1}\NormalTok{, }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{)}
+\NormalTok{g3 }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{( Sum3, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{white, }\AttributeTok{y=}\NormalTok{sat, }\AttributeTok{fill=}\NormalTok{white)) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{width =} \DecValTok{1}\NormalTok{, }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{)}
+\NormalTok{g4 }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{( Sum4, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{black, }\AttributeTok{y=}\NormalTok{sat, }\AttributeTok{fill=}\NormalTok{black)) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{width =} \DecValTok{1}\NormalTok{, }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{)}
+
+\FunctionTok{grid.arrange}\NormalTok{(g1,g2, g3, g4, }\AttributeTok{nrow=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\hypertarget{realizad-el-mismo-tipo-de-visualizaciones-con-la-variable-colgpa-y-las-variables-female-athlete-y-whiteblack.}{%
+\subsubsection{Realizad el mismo tipo de visualizaciones con la variable
+'colgpa` y las variables 'female`, 'athlete` y
+'white`/'black`.}\label{realizad-el-mismo-tipo-de-visualizaciones-con-la-variable-colgpa-y-las-variables-female-athlete-y-whiteblack.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Sum1 }\OtherTok{\textless{}{-}} \FunctionTok{summarize}\NormalTok{( }\FunctionTok{group\_by}\NormalTok{(gpa, female), }\AttributeTok{n=}\FunctionTok{length}\NormalTok{(female), }\AttributeTok{colgpa=}\FunctionTok{mean}\NormalTok{(colgpa))}
+\NormalTok{Sum2 }\OtherTok{\textless{}{-}} \FunctionTok{summarize}\NormalTok{( }\FunctionTok{group\_by}\NormalTok{(gpa, athlete), }\AttributeTok{n=}\FunctionTok{length}\NormalTok{(athlete), }\AttributeTok{colgpa=}\FunctionTok{mean}\NormalTok{(colgpa))}
+\NormalTok{Sum3 }\OtherTok{\textless{}{-}} \FunctionTok{summarize}\NormalTok{( }\FunctionTok{group\_by}\NormalTok{(gpa, white), }\AttributeTok{n=}\FunctionTok{length}\NormalTok{(white), }\AttributeTok{colgpa=}\FunctionTok{mean}\NormalTok{(colgpa))}
+\NormalTok{Sum4 }\OtherTok{\textless{}{-}} \FunctionTok{summarize}\NormalTok{( }\FunctionTok{group\_by}\NormalTok{(gpa, black), }\AttributeTok{n=}\FunctionTok{length}\NormalTok{(black), }\AttributeTok{colgpa=}\FunctionTok{mean}\NormalTok{(colgpa))}
+\NormalTok{g1 }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{( Sum1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{female, }\AttributeTok{y=}\NormalTok{colgpa, }\AttributeTok{fill=}\NormalTok{female)) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{width =} \DecValTok{1}\NormalTok{, }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{)}
+\NormalTok{g2 }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{( Sum2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{athlete, }\AttributeTok{y=}\NormalTok{colgpa, }\AttributeTok{fill=}\NormalTok{athlete)) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{width =} \DecValTok{1}\NormalTok{, }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{)}
+\NormalTok{g3 }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{( Sum3, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{white, }\AttributeTok{y=}\NormalTok{colgpa, }\AttributeTok{fill=}\NormalTok{white)) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{width =} \DecValTok{1}\NormalTok{, }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{)}
+\NormalTok{g4 }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{( Sum4, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{black, }\AttributeTok{y=}\NormalTok{colgpa, }\AttributeTok{fill=}\NormalTok{black)) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{width =} \DecValTok{1}\NormalTok{, }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{)}
+
+\FunctionTok{grid.arrange}\NormalTok{(g1,g2, g3, g4, }\AttributeTok{nrow=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\hypertarget{interpretad-los-gruxe1ficos-brevemente}{%
+\subsubsection{Interpretad los gráficos
+brevemente}\label{interpretad-los-gruxe1ficos-brevemente}}
+
+La variable SAT, como se puede ver en el histograma y en el diagrama de
+caja tiene una distribución normal. Cuando se mete todos los datos como
+puntos dentro del diagrama de caja se ve que están todo sobre la media.
+
+Por otro lado, la variable COLPA, la mayor parte de los datos se
+encuentran en la mitad superior, como se puede comprobar en el
+histograma y diagrama de caja, además cuando se mete todos los datos
+como puntos, se confirma esta distribución de los datos.
+
+Cuando comparamos la variable SAT con otras, nos damos cuenta de que la
+nota de acceso (SAT) es mayor para los hombres que para las mujeres,
+aunque la diferencia no es muy significativa. Al contrario del sexo, los
+no deportistas tienen mejor nota de acceso que los que si lo son. Si lo
+comparamos con la raza, los blancos tienen una mayor nota que los que
+son de raza negra.
+
+Si comparamos la nota media (Colpa), nos damos cuenta de que las mujeres
+tienen mejor nota que los hombres. Ocurre igual para las personas que no
+son deportistas, tienen mejor nota media. Respecto a la raza los blancos
+tienen mejor nota media que los de raza negra.
+
+\hypertarget{intervalo-de-confianza-de-la-media-poblacional-de-la-variable-sat-y-colgpa}{%
+\section{Intervalo de confianza de la media poblacional de la variable
+sat y
+colgpa}\label{intervalo-de-confianza-de-la-media-poblacional-de-la-variable-sat-y-colgpa}}
+
+\hypertarget{supuestos}{%
+\subsection{Supuestos}\label{supuestos}}
+
+Los supuestos para le intervalo de confianza es si se puede suponer una
+distribución normal y como se ha visto en el apartado anterior, ambas
+variables la tienen.
+
+\hypertarget{funciuxf3n-de-cuxe1lculo-del-intervalo-de-confianza}{%
+\subsection{Función de cálculo del intervalo de
+confianza}\label{funciuxf3n-de-cuxe1lculo-del-intervalo-de-confianza}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IC }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, NC)\{}
+\NormalTok{  n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(x)}
+\NormalTok{  errorTipic }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(x) }\SpecialCharTok{/} \FunctionTok{sqrt}\NormalTok{( n )}
+\NormalTok{  errorTipic}
+\NormalTok{  t}\OtherTok{\textless{}{-}}\FunctionTok{qnorm}\NormalTok{( }\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{NC}\SpecialCharTok{/}\DecValTok{2}\NormalTok{ )}
+\NormalTok{  t}
+\NormalTok{  error}\OtherTok{\textless{}{-}}\NormalTok{ t }\SpecialCharTok{*}\NormalTok{ errorTipic}
+\NormalTok{  error}
+  \FunctionTok{return}\NormalTok{ ( }\FunctionTok{c}\NormalTok{( }\FunctionTok{mean}\NormalTok{(x) }\SpecialCharTok{{-}}\NormalTok{ error, }\FunctionTok{mean}\NormalTok{(x) }\SpecialCharTok{+}\NormalTok{ error ))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{intervalo-de-confianza-de-la-variable-sat}{%
+\subsection{Intervalo de confianza de la variable
+sat}\label{intervalo-de-confianza-de-la-variable-sat}}
+
+\hypertarget{intervalo-confianza-al-90}{%
+\subsubsection{Intervalo Confianza al
+90\%}\label{intervalo-confianza-al-90}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Intervalo Confianza}
+
+\NormalTok{ic\_90 }\OtherTok{\textless{}{-}} \FunctionTok{IC}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{sat, }\AttributeTok{NC=}\FloatTok{0.1}\NormalTok{ ); ic\_90}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1026.766 1033.896
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Comprobación}
+\FunctionTok{z.test}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{sat, }\AttributeTok{sigma.x=}\FunctionTok{sd}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{sat), }\AttributeTok{conf.level =} \FloatTok{0.9}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  One-sample z-Test
+## 
+## data:  gpa$sat
+## z = 475.39, p-value < 2.2e-16
+## alternative hypothesis: true mean is not equal to 0
+## 90 percent confidence interval:
+##  1026.766 1033.896
+## sample estimates:
+## mean of x 
+##  1030.331
+\end{verbatim}
+
+\hypertarget{intervalo-confianza-al-95}{%
+\subsubsection{Intervalo Confianza al
+95\%}\label{intervalo-confianza-al-95}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Intervalo Confianza}
+
+\NormalTok{ic\_95 }\OtherTok{\textless{}{-}} \FunctionTok{IC}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{sat, }\AttributeTok{NC=}\FloatTok{0.05}\NormalTok{ ); ic\_95}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1026.083 1034.579
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Comprobación}
+\FunctionTok{z.test}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{sat, }\AttributeTok{sigma.x=}\FunctionTok{sd}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{sat), }\AttributeTok{conf.level =} \FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  One-sample z-Test
+## 
+## data:  gpa$sat
+## z = 475.39, p-value < 2.2e-16
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  1026.083 1034.579
+## sample estimates:
+## mean of x 
+##  1030.331
+\end{verbatim}
+
+\hypertarget{intervalo-de-confianza-de-la-variable-colgpa}{%
+\subsection{Intervalo de confianza de la variable
+colgpa}\label{intervalo-de-confianza-de-la-variable-colgpa}}
+
+\hypertarget{intervalo-confianza-al-90-1}{%
+\subsubsection{Intervalo Confianza al
+90\%}\label{intervalo-confianza-al-90-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Intervalo Confianza}
+
+\NormalTok{ic\_90 }\OtherTok{\textless{}{-}} \FunctionTok{IC}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa, }\AttributeTok{NC=}\FloatTok{0.1}\NormalTok{ ); ic\_90}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.637309 2.670953
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Comprobación}
+\FunctionTok{z.test}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{colgpa, }\AttributeTok{sigma.x=}\FunctionTok{sd}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{colgpa), }\AttributeTok{conf.level =} \FloatTok{0.9}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  One-sample z-Test
+## 
+## data:  gpa$colgpa
+## z = 259.52, p-value < 2.2e-16
+## alternative hypothesis: true mean is not equal to 0
+## 90 percent confidence interval:
+##  2.637309 2.670953
+## sample estimates:
+## mean of x 
+##  2.654131
+\end{verbatim}
+
+\hypertarget{intervalo-confianza-al-95-1}{%
+\subsubsection{Intervalo Confianza al
+95\%}\label{intervalo-confianza-al-95-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Intervalo Confianza}
+
+\NormalTok{ic\_95 }\OtherTok{\textless{}{-}} \FunctionTok{IC}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa, }\AttributeTok{NC=}\FloatTok{0.05}\NormalTok{ ); ic\_95}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.634086 2.674176
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Comprobación}
+\FunctionTok{z.test}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{colgpa, }\AttributeTok{sigma.x=}\FunctionTok{sd}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{colgpa), }\AttributeTok{conf.level =} \FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  One-sample z-Test
+## 
+## data:  gpa$colgpa
+## z = 259.52, p-value < 2.2e-16
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  2.634086 2.674176
+## sample estimates:
+## mean of x 
+##  2.654131
+\end{verbatim}
+
+\hypertarget{interpretaciuxf3n}{%
+\subsection{Interpretación}\label{interpretaciuxf3n}}
+
+El intervalo de confianza del 90\% de la media poblacional de Sat es
+(1026.766, 1033.896), esto quiere decir que, si se sacan diferentes
+muestras de la población, el 90\% de los intervalos calculados contienen
+el valor de la media poblacional.
+
+El intervalo de confianza del 95\% de la media poblacional de Sat es
+(1026.083, 1034.579), esto quiere decir que, si se sacan diferentes
+muestras de la población, el 95\% de los intervalos calculados contienen
+el valor de la media poblacional.
+
+El intervalo de confianza del 90\% de la media poblacional de Colgpa es
+(2.637309, 2.670953), esto quiere decir que, si se sacan diferentes
+muestras de la población, el 90\% de los intervalos calculados contienen
+el valor de la media poblacional.
+
+El intervalo de confianza del 95\% de la media poblacional de Colgpa es
+(2.634086, 2.674176), esto quiere decir que, si se sacan diferentes
+muestras de la población, el 95\% de los intervalos calculados contienen
+el valor de la media poblacional.
+
+\hypertarget{ser-atleta-influye-en-la-nota}{%
+\section{¿Ser atleta influye en la
+nota?}\label{ser-atleta-influye-en-la-nota}}
+
+\hypertarget{anuxe1lisis-visual}{%
+\subsection{Análisis visual}\label{anuxe1lisis-visual}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{V\_athlete }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(gpa, gpa}\SpecialCharTok{$}\NormalTok{athlete }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{V\_no\_athlete }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(gpa, gpa}\SpecialCharTok{$}\NormalTok{athlete }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{)}
+
+\NormalTok{h1 }\OtherTok{\textless{}{-}} \FunctionTok{hist}\NormalTok{(V\_athlete}\SpecialCharTok{$}\NormalTok{colgpa ,}\AttributeTok{col=}\StringTok{"lightsalmon"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Histograma Variable colgpa de los athletas"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{h2 }\OtherTok{\textless{}{-}} \FunctionTok{hist}\NormalTok{(V\_no\_athlete}\SpecialCharTok{$}\NormalTok{colgpa ,}\AttributeTok{col=}\StringTok{"lightsalmon"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Histograma Variable colgpa de NO los athletas"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-13-2.pdf}
+
+A nivel visual, nos damos cuenta de que las medias de los estudiantes no
+deportistas son mayores de los que sí lo son.
+
+\hypertarget{funciuxf3n-para-el-contraste-de-medias}{%
+\subsection{Función para el contraste de
+medias}\label{funciuxf3n-para-el-contraste-de-medias}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{funcion\_contraste\_medias }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{( x1, x2, }\AttributeTok{CL=}\FloatTok{0.95}\NormalTok{, }\AttributeTok{Var\_Igual=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{metodo\_calculo=}\StringTok{"two.sided"}\NormalTok{ )\{}
+  
+\NormalTok{  media\_1}\OtherTok{\textless{}{-}}\FunctionTok{mean}\NormalTok{(x1)}
+\NormalTok{  length\_1}\OtherTok{\textless{}{-}}\FunctionTok{length}\NormalTok{(x1)}
+\NormalTok{  sd1}\OtherTok{\textless{}{-}}\FunctionTok{sd}\NormalTok{(x1)}
+  
+\NormalTok{  media\_2}\OtherTok{\textless{}{-}}\FunctionTok{mean}\NormalTok{(x2)}
+\NormalTok{  length\_2}\OtherTok{\textless{}{-}}\FunctionTok{length}\NormalTok{(x2)}
+\NormalTok{  sd2}\OtherTok{\textless{}{-}}\FunctionTok{sd}\NormalTok{(x2)}
+  
+  
+  \ControlFlowTok{if}\NormalTok{ (Var\_Igual}\SpecialCharTok{==}\ConstantTok{TRUE}\NormalTok{)\{}
+  
+\NormalTok{      raiz }\OtherTok{\textless{}{-}}\FunctionTok{sqrt}\NormalTok{( ((length\_1}\DecValTok{{-}1}\NormalTok{)}\SpecialCharTok{*}\NormalTok{sd1}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (length\_2}\DecValTok{{-}1}\NormalTok{)}\SpecialCharTok{*}\NormalTok{sd2}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{ )}\SpecialCharTok{/}\NormalTok{(length\_1}\SpecialCharTok{+}\NormalTok{length\_2}\DecValTok{{-}2}\NormalTok{) )}
+\NormalTok{      Sb }\OtherTok{\textless{}{-}}\NormalTok{ raiz}\SpecialCharTok{*}\FunctionTok{sqrt}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\NormalTok{length\_1 }\SpecialCharTok{+} \DecValTok{1}\SpecialCharTok{/}\NormalTok{length\_2)}
+\NormalTok{      df}\OtherTok{\textless{}{-}}\NormalTok{(length\_1 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}\NormalTok{ (length\_2 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}
+      
+\NormalTok{  \}}\ControlFlowTok{else}\NormalTok{\{}
+  
+\NormalTok{      Sb }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{( sd1}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{length\_1 }\SpecialCharTok{+}\NormalTok{ sd2}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{length\_2 )}
+\NormalTok{      denominador }\OtherTok{\textless{}{-}}\NormalTok{ ( (sd1}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{length\_1)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{(length\_1}\DecValTok{{-}1}\NormalTok{) }\SpecialCharTok{+}\NormalTok{ (sd2}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{length\_2)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{(length\_2}\DecValTok{{-}1}\NormalTok{))}
+\NormalTok{      df }\OtherTok{\textless{}{-}}\NormalTok{ ( (sd1}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{length\_1 }\SpecialCharTok{+}\NormalTok{ sd2}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{length\_2)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{ ) }\SpecialCharTok{/}\NormalTok{ denominador}
+      
+\NormalTok{  \}}
+
+\NormalTok{  alfa }\OtherTok{\textless{}{-}}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{CL)}
+\NormalTok{  t}\OtherTok{\textless{}{-}}\NormalTok{ (media\_1}\SpecialCharTok{{-}}\NormalTok{media\_2) }\SpecialCharTok{/}\NormalTok{ Sb}
+  
+  
+  \ControlFlowTok{if}\NormalTok{ (metodo\_calculo}\SpecialCharTok{==}\StringTok{"two.sided"}\NormalTok{)\{}
+  
+\NormalTok{      tcritical }\OtherTok{\textless{}{-}} \FunctionTok{qt}\NormalTok{( alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, df, }\AttributeTok{lower.tail=}\ConstantTok{FALSE}\NormalTok{ )}
+\NormalTok{      pvalue}\OtherTok{\textless{}{-}}\FunctionTok{pt}\NormalTok{( }\FunctionTok{abs}\NormalTok{(t), df, }\AttributeTok{lower.tail=}\ConstantTok{FALSE}\NormalTok{ )}\SpecialCharTok{*}\DecValTok{2}
+      
+\NormalTok{  \}}
+  
+  \ControlFlowTok{if}\NormalTok{ (metodo\_calculo}\SpecialCharTok{==}\StringTok{"greater"}\NormalTok{)\{}
+  
+\NormalTok{      tcritical }\OtherTok{\textless{}{-}} \FunctionTok{qt}\NormalTok{( alfa, df, }\AttributeTok{lower.tail=}\ConstantTok{FALSE}\NormalTok{ )}
+\NormalTok{      pvalue}\OtherTok{\textless{}{-}}\FunctionTok{pt}\NormalTok{( t, df, }\AttributeTok{lower.tail=}\ConstantTok{FALSE}\NormalTok{ )  }
+      
+\NormalTok{  \}}
+  
+  \ControlFlowTok{if}\NormalTok{ (metodo\_calculo}\SpecialCharTok{==}\StringTok{"less"}\NormalTok{)\{}
+  
+\NormalTok{      tcritical }\OtherTok{\textless{}{-}} \FunctionTok{qt}\NormalTok{( alfa, df, }\AttributeTok{lower.tail=}\ConstantTok{TRUE}\NormalTok{ )}
+\NormalTok{      pvalue}\OtherTok{\textless{}{-}}\FunctionTok{pt}\NormalTok{( t, df, }\AttributeTok{lower.tail=}\ConstantTok{TRUE}\NormalTok{ )}
+        
+\NormalTok{  \}}
+  
+  
+\NormalTok{  resultados }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(t,tcritical,pvalue)}
+
+  \FunctionTok{return}\NormalTok{ (resultados)}
+
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{pregunta-de-investigaciuxf3n}{%
+\subsection{Pregunta de
+investigación}\label{pregunta-de-investigaciuxf3n}}
+
+¿Ser atleta influye en la nota?
+
+\hypertarget{hipuxf3tesis-nula-y-la-alternativa}{%
+\subsection{Hipótesis nula y la
+alternativa}\label{hipuxf3tesis-nula-y-la-alternativa}}
+
+H0 : µNotaAthleta = µNotaNoAthleta
+
+H1 : µNotaAthleta \textless{} µNotaNoAthleta
+
+\hypertarget{justificaciuxf3n-del-test-a-aplicar}{%
+\subsection{Justificación del test a
+aplicar}\label{justificaciuxf3n-del-test-a-aplicar}}
+
+La prueba para aplicar es la diferencia de medias, ya que tenemos dos
+grupos bien diferenciados, los deportistas y los no. Y al querer
+comprobar si la diferencia de notas influye a factor del deporte, esta
+prueba puede mostrar un resultado adecuado que pueda contestar la
+pregunta.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Comprobamos si las varianzas son iguales}
+\FunctionTok{var.test}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{athlete }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{athlete }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{] )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  F test to compare two variances
+## 
+## data:  gpa$colgpa[gpa$athlete == TRUE] and gpa$colgpa[gpa$athlete == FALSE]
+## F = 0.82199, num df = 193, denom df = 3942, p-value = 0.07287
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.6762059 1.0186147
+## sample estimates:
+## ratio of variances 
+##          0.8219902
+\end{verbatim}
+
+El resultado del test es un valor p \textgreater{} 0.05, por lo que no
+se descarta la diferencia de varianzas de las poblaciones atletas y no
+atletas. Por lo que el tipo de test es con dos muestras distintas y
+varianzas iguales.
+
+\hypertarget{cuxe1lculo}{%
+\subsection{Cálculo}\label{cuxe1lculo}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Uso funcion implementada}
+\FunctionTok{funcion\_contraste\_medias}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{athlete }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{athlete }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{], }\AttributeTok{Var\_Igual=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{metodo\_calculo =} \StringTok{"two.sided"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           t tcritical       pvalue
+## 1 -5.910309  1.960538 3.689891e-09
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Validación de la función}
+\FunctionTok{t.test}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{athlete }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{athlete }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{], }\AttributeTok{var.equal=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Two Sample t-test
+## 
+## data:  gpa$colgpa[gpa$athlete == TRUE] and gpa$colgpa[gpa$athlete == FALSE]
+## t = -5.9103, df = 4135, p-value = 3.69e-09
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.3792088 -0.1902956
+## sample estimates:
+## mean of x mean of y 
+##  2.382732  2.667484
+\end{verbatim}
+
+\hypertarget{interpretaciuxf3n-del-test}{%
+\subsection{Interpretación del test}\label{interpretaciuxf3n-del-test}}
+
+El valor crítico para un nivel de confianza del 95\% es 1.960538 y el
+valor observado es -5.910309. Con estos resultados en una zona de
+rechazo de la hipótesis nula y podemos concluir que los estudiantes no
+atletas tienen mejor nota que los que lo son.
+
+Se concluye lo mismo con el valor P= 3.689891e-09, que es muy inferior
+al valor de alfa que es 0.05, comparando este resultado con los
+intervalos de confianza de los atletas y los que no lo son, llegamos a
+la misma conclusión en los dos casos.
+
+\hypertarget{las-mujeres-tienen-mejor-nota-que-los-hombres}{%
+\section{¿Las mujeres tienen mejor nota que los
+hombres?}\label{las-mujeres-tienen-mejor-nota-que-los-hombres}}
+
+\hypertarget{anuxe1lisis-visual-1}{%
+\subsection{Análisis visual}\label{anuxe1lisis-visual-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{V\_female }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(gpa, gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{V\_no\_female }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(gpa, gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{)}
+
+\NormalTok{h1 }\OtherTok{\textless{}{-}} \FunctionTok{hist}\NormalTok{(V\_female}\SpecialCharTok{$}\NormalTok{colgpa ,}\AttributeTok{col=}\StringTok{"lightsalmon"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Histograma Variable colgpa de las Mujeres"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{h2 }\OtherTok{\textless{}{-}} \FunctionTok{hist}\NormalTok{(V\_no\_female}\SpecialCharTok{$}\NormalTok{colgpa ,}\AttributeTok{col=}\StringTok{"lightsalmon"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Histograma Variable colgpa de los Hombres"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-17-2.pdf}
+
+A nivel visual, nos damos cuenta de que las medias de los hombres son un
+poco mejor que las de las mujeres, aunque el cambio (de manera visual)
+no es muy significativo.
+
+\hypertarget{funciuxf3n-para-el-contraste-de-medias-1}{%
+\subsection{Función para el contraste de
+medias}\label{funciuxf3n-para-el-contraste-de-medias-1}}
+
+Usamos la misma función que para la pregunta anterior
+
+\hypertarget{pregunta-de-investigaciuxf3n-1}{%
+\subsection{Pregunta de
+investigación}\label{pregunta-de-investigaciuxf3n-1}}
+
+¿Las mujeres tienen mejor nota que los hombres?
+
+\hypertarget{hipuxf3tesis-nula-y-la-alternativa-1}{%
+\subsection{Hipótesis nula y la
+alternativa}\label{hipuxf3tesis-nula-y-la-alternativa-1}}
+
+H0 : µNotaMujer = µNotaHombre
+
+H1 : µNotaMujer \textless= µNotaHombre
+
+\hypertarget{justificaciuxf3n-del-test-a-aplicar-al-95}{%
+\subsection{Justificación del test a aplicar al
+95\%}\label{justificaciuxf3n-del-test-a-aplicar-al-95}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Comprobamos si las varianzas son iguales}
+\FunctionTok{var.test}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{] )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  F test to compare two variances
+## 
+## data:  gpa$colgpa[gpa$female == TRUE] and gpa$colgpa[gpa$female == FALSE]
+## F = 0.82757, num df = 1859, denom df = 2276, p-value = 2.024e-05
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.7590051 0.9026724
+## sample estimates:
+## ratio of variances 
+##          0.8275687
+\end{verbatim}
+
+El resultado del test es un valor p \textless{} 0.001, por lo que se
+descarta la igualdad de varianzas de las poblaciones Mujeres y Hobres.
+Por lo que el tipo de test es con dos muestras distintas y varianzas
+diferentes.
+
+\hypertarget{cuxe1lculo-a-95}{%
+\subsection{Cálculo a 95\%}\label{cuxe1lculo-a-95}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Uso funcion implementada}
+\FunctionTok{funcion\_contraste\_medias}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{], }\AttributeTok{Var\_Igual=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{metodo\_calculo =} \StringTok{"two.sided"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          t tcritical       pvalue
+## 1 7.078735  1.960545 1.704394e-12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Validación de la función}
+\FunctionTok{t.test}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{], }\AttributeTok{var.equal=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  gpa$colgpa[gpa$female == TRUE] and gpa$colgpa[gpa$female == FALSE]
+## t = 7.0787, df = 4087.4, p-value = 1.704e-12
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.1036283 0.1830188
+## sample estimates:
+## mean of x mean of y 
+##  2.733016  2.589693
+\end{verbatim}
+
+\hypertarget{interpretaciuxf3n-del-test-a-95}{%
+\subsection{Interpretación del test a
+95\%}\label{interpretaciuxf3n-del-test-a-95}}
+
+El valor crítico para un nivel de confianza del 95\% es 1.960545 y el
+valor observado es 7.078735 . Con estos resultados en una zona de
+rechazo de la hipótesis nula y podemos concluir que los estudiantes
+hombres tienen mejores notas que las mujeres.
+
+Se concluye lo mismo con el valor P= 1.704394e-12, que es muy inferior
+al valor de alfa que es 0.05, comparando este resultado con los
+intervalos de confianza de las mujeres y los hombres, llegamos a la
+misma conclusión en los dos casos.
+
+\hypertarget{justificaciuxf3n-del-test-a-aplicar-al-90}{%
+\subsection{Justificación del test a aplicar al
+90\%}\label{justificaciuxf3n-del-test-a-aplicar-al-90}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Comprobamos si las varianzas son iguales}
+\FunctionTok{var.test}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{], }\AttributeTok{conf.level =} \FloatTok{0.9}\NormalTok{ )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  F test to compare two variances
+## 
+## data:  gpa$colgpa[gpa$female == TRUE] and gpa$colgpa[gpa$female == FALSE]
+## F = 0.82757, num df = 1859, denom df = 2276, p-value = 2.024e-05
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 90 percent confidence interval:
+##  0.7696299 0.8901446
+## sample estimates:
+## ratio of variances 
+##          0.8275687
+\end{verbatim}
+
+El resultado del test es un valor p \textless{} 0.001, por lo que se
+descarta la igualdad de varianzas de las poblaciones Mujeres y Hobres.
+Por lo que el tipo de test es con dos muestras distintas y varianzas
+diferentes.
+
+\hypertarget{cuxe1lculo-a-90}{%
+\subsection{Cálculo a 90\%}\label{cuxe1lculo-a-90}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Uso funcion implementada}
+\FunctionTok{funcion\_contraste\_medias}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{], }\AttributeTok{CL=}\FloatTok{0.90}\NormalTok{, }\AttributeTok{Var\_Igual=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{metodo\_calculo =} \StringTok{"two.sided"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          t tcritical       pvalue
+## 1 7.078735  1.645227 1.704394e-12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Validación de la función}
+\FunctionTok{t.test}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{], }\AttributeTok{var.equal=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{conf.level =} \FloatTok{0.9}\NormalTok{, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  gpa$colgpa[gpa$female == TRUE] and gpa$colgpa[gpa$female == FALSE]
+## t = 7.0787, df = 4087.4, p-value = 1.704e-12
+## alternative hypothesis: true difference in means is not equal to 0
+## 90 percent confidence interval:
+##  0.1100126 0.1766345
+## sample estimates:
+## mean of x mean of y 
+##  2.733016  2.589693
+\end{verbatim}
+
+\hypertarget{interpretaciuxf3n-del-test-a-90}{%
+\subsection{Interpretación del test a
+90\%}\label{interpretaciuxf3n-del-test-a-90}}
+
+El valor crítico para un nivel de confianza del 90\% es 1.645227 y el
+valor observado es 7.078735 . Con estos resultados en una zona de
+rechazo de la hipótesis nula y podemos concluir que los estudiantes
+hombres tienen mejores notas que las mujeres.
+
+Se concluye lo mismo con el valor P= 1.704394e-12, que es muy inferior
+al valor de alfa que es 0.1, comparando este resultado con los
+intervalos de confianza de las mujeres y los hombres, llegamos a la
+misma conclusión en los dos casos.
+
+\hypertarget{hay-diferencias-en-la-nota-seguxfan-la-raza}{%
+\section{¿Hay diferencias en la nota según la
+raza?}\label{hay-diferencias-en-la-nota-seguxfan-la-raza}}
+
+\hypertarget{anuxe1lisis-visual-2}{%
+\subsection{Análisis visual}\label{anuxe1lisis-visual-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{V\_black }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(gpa, gpa}\SpecialCharTok{$}\NormalTok{black }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{V\_white }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(gpa, gpa}\SpecialCharTok{$}\NormalTok{white }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{h1 }\OtherTok{\textless{}{-}} \FunctionTok{hist}\NormalTok{(V\_black}\SpecialCharTok{$}\NormalTok{colgpa ,}\AttributeTok{col=}\StringTok{"lightsalmon"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Histograma Variable colgpa de las personas Negras"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{h2 }\OtherTok{\textless{}{-}} \FunctionTok{hist}\NormalTok{(V\_white}\SpecialCharTok{$}\NormalTok{colgpa ,}\AttributeTok{col=}\StringTok{"lightsalmon"}\NormalTok{,}\AttributeTok{main=}\StringTok{"Histograma Variable colgpa de las personas Blancas"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-22-2.pdf}
+
+A nivel visual, nos damos cuenta de que las medias de los estudiantes de
+raza blanca son mayores de los de raza negra.
+
+\hypertarget{funciuxf3n-para-el-contraste-de-medias-2}{%
+\subsection{Función para el contraste de
+medias}\label{funciuxf3n-para-el-contraste-de-medias-2}}
+
+Usamos la misma función que para la pregunta anterior
+
+\hypertarget{pregunta-de-investigaciuxf3n-2}{%
+\subsection{Pregunta de
+investigación}\label{pregunta-de-investigaciuxf3n-2}}
+
+¿Hay diferencias en la nota según la raza?
+
+\hypertarget{hipuxf3tesis-nula-y-la-alternativa-2}{%
+\subsection{Hipótesis nula y la
+alternativa}\label{hipuxf3tesis-nula-y-la-alternativa-2}}
+
+H0 : µNotaRazaNegra = µNotaRazaBlanca
+
+H1 : µNotaRazaNegra != µNotaRazaBlanca
+
+\hypertarget{justificaciuxf3n-del-test-a-aplicar-1}{%
+\subsection{Justificación del test a
+aplicar}\label{justificaciuxf3n-del-test-a-aplicar-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Comprobamos si las varianzas son iguales}
+\FunctionTok{var.test}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{white }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{black }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{] )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  F test to compare two variances
+## 
+## data:  gpa$colgpa[gpa$white == TRUE] and gpa$colgpa[gpa$black == TRUE]
+## F = 1.127, num df = 3828, denom df = 228, p-value = 0.2343
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.9250878 1.3509805
+## sample estimates:
+## ratio of variances 
+##           1.126968
+\end{verbatim}
+
+El resultado del test es un valor p \textgreater{} 0.001, por lo que NO
+se descarta la igualdad de varianzas de las poblaciones de Negros y
+Blancos. Por lo que el tipo de test es con dos muestras distintas y
+varianzas iguales.
+
+\hypertarget{cuxe1lculo-1}{%
+\subsection{Cálculo}\label{cuxe1lculo-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Uso funcion implementada}
+\FunctionTok{funcion\_contraste\_medias}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{white }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{black }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], }\AttributeTok{Var\_Igual=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{metodo\_calculo =} \StringTok{"two.sided"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          t tcritical      pvalue
+## 1 9.559319  1.960549 1.99014e-21
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Validación de la función}
+\FunctionTok{t.test}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{white }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], gpa}\SpecialCharTok{$}\NormalTok{colgpa[gpa}\SpecialCharTok{$}\NormalTok{black }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{], }\AttributeTok{var.equal=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Two Sample t-test
+## 
+## data:  gpa$colgpa[gpa$white == TRUE] and gpa$colgpa[gpa$black == TRUE]
+## t = 9.5593, df = 4056, p-value < 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.3360979 0.5095302
+## sample estimates:
+## mean of x mean of y 
+##  2.678360  2.255546
+\end{verbatim}
+
+\hypertarget{interpretaciuxf3n-del-test-1}{%
+\subsection{Interpretación del
+test}\label{interpretaciuxf3n-del-test-1}}
+
+El valor crítico para un nivel de confianza del 95\% es 1.960549 y el
+valor observado es 9.559319. Con estos resultados en una zona de rechazo
+de la hipótesis nula y podemos concluir que los estudiantes blancos
+tienen mejores notas que los estudiantes negros.
+
+Se concluye lo mismo con el valor P=1.99014e-21, que es muy inferior al
+valor de alfa que es 0.05, comparando este resultado con los intervalos
+de confianza de las personas negras y blancas, llegamos a la misma
+conclusión en los dos casos.
+
+\hypertarget{proporciuxf3n-de-atletas}{%
+\section{Proporción de atletas}\label{proporciuxf3n-de-atletas}}
+
+\hypertarget{anuxe1lisis-visual-3}{%
+\subsection{Análisis visual}\label{anuxe1lisis-visual-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tabla }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{athlete)}
+
+\NormalTok{etiquetas }\OtherTok{\textless{}{-}}\FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\DecValTok{100} \SpecialCharTok{*}\NormalTok{ tabla}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(tabla), }\DecValTok{2}\NormalTok{), }\StringTok{"\%"}\NormalTok{)}
+
+\FunctionTok{pie}\NormalTok{(tabla, }\AttributeTok{labels =}\NormalTok{ etiquetas, }\AttributeTok{main=}\StringTok{"Proporción de personas Athletas entre los estudiantes"}\NormalTok{)}
+
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"TRUE"}\NormalTok{, }\StringTok{"FALSE"}\NormalTok{),}
+       \AttributeTok{fill =}  \FunctionTok{c}\NormalTok{(}\StringTok{"White"}\NormalTok{, }\StringTok{"lightblue"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+A nivel visual, vemos que la proporción de deportista entre lo
+estudiantes es menor de los que lo son.
+
+\hypertarget{pregunta-de-investigaciuxf3n-3}{%
+\subsection{Pregunta de
+investigación}\label{pregunta-de-investigaciuxf3n-3}}
+
+¿La proporción de atletas en la población es inferior al 5\%?
+
+\hypertarget{hipuxf3tesis-nula-y-la-alternativa-3}{%
+\subsection{Hipótesis nula y la
+alternativa}\label{hipuxf3tesis-nula-y-la-alternativa-3}}
+
+H0 : p \textless= 0.5
+
+H1 : p \textgreater{} 0.5
+
+donde p es la proporción de athletas en la sociedad
+
+\hypertarget{justificaciuxf3n-del-test-a-aplicar-2}{%
+\subsection{Justificación del test a
+aplicar}\label{justificaciuxf3n-del-test-a-aplicar-2}}
+
+Se debe realizar un test de una muestra sobre la proporción. Se calcula
+la proporción de estudiantes que son atletas es menor que la proporción
+de los que no lo son. Esta proporción se compara con el valor 0.5.
+
+\hypertarget{realizad-los-cuxe1lculos-del-test}{%
+\subsection{Realizad los cálculos del
+test}\label{realizad-los-cuxe1lculos-del-test}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(gpa)}
+\NormalTok{p }\OtherTok{=}\NormalTok{ (}\FunctionTok{sum}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{athlete }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{))}\SpecialCharTok{/}\NormalTok{ n;}
+
+\NormalTok{p0 }\OtherTok{\textless{}{-}} \FloatTok{0.5}
+
+\NormalTok{Valor\_Observado }\OtherTok{\textless{}{-}}\NormalTok{ (p }\SpecialCharTok{{-}}\NormalTok{ p0)}\SpecialCharTok{/} \FunctionTok{sqrt}\NormalTok{( p0}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{p0)}\SpecialCharTok{/}\NormalTok{n)}
+\NormalTok{Valor\_Critico }\OtherTok{\textless{}{-}} \FunctionTok{qnorm}\NormalTok{( }\FloatTok{0.05}\NormalTok{, }\AttributeTok{lower.tail=}\ConstantTok{FALSE}\NormalTok{ )}
+\NormalTok{pvalue }\OtherTok{\textless{}{-}} \FunctionTok{pnorm}\NormalTok{( Valor\_Observado, }\AttributeTok{lower.tail=}\ConstantTok{FALSE}\NormalTok{ )}
+
+\FunctionTok{data.frame}\NormalTok{(p,Valor\_Observado,Valor\_Critico, pvalue)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            p Valor_Observado Valor_Critico pvalue
+## 1 0.04689388       -58.28713      1.644854      1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Comprobación del Test}
+\FunctionTok{prop.test}\NormalTok{( }\FunctionTok{sum}\NormalTok{( gpa}\SpecialCharTok{$}\NormalTok{athlete), n, }\AttributeTok{p=}\FloatTok{0.5}\NormalTok{, }\AttributeTok{correct=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{alternative=}\StringTok{"greater"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  1-sample proportions test without continuity correction
+## 
+## data:  sum(gpa$athlete) out of n, null probability 0.5
+## X-squared = 3397.4, df = 1, p-value = 1
+## alternative hypothesis: true p is greater than 0.5
+## 95 percent confidence interval:
+##  0.04177721 1.00000000
+## sample estimates:
+##          p 
+## 0.04689388
+\end{verbatim}
+
+\hypertarget{interpretaciuxf3n-del-test-2}{%
+\subsection{Interpretación del
+test}\label{interpretaciuxf3n-del-test-2}}
+
+El valor crítico para α=0.05 es 1.644854 y el valor observado es
+-58.28713. Por tanto, el valor observado se encuentra dentro de la zona
+de aceptación y podemos aprobar la hipótesis nula. Se llega a la misma
+conclusión con el valor p, que es igual y superior a α=0.05, por lo que
+se concluye de que la proporción de estudiantes atletas es menor al 5\%.
+
+\hypertarget{hay-muxe1s-atletas-entre-los-hombres-que-entre-las-mujeres}{%
+\section{¿Hay más atletas entre los hombres que entre las
+mujeres?}\label{hay-muxe1s-atletas-entre-los-hombres-que-entre-las-mujeres}}
+
+\hypertarget{anuxe1lisis-visual-4}{%
+\subsection{Análisis visual}\label{anuxe1lisis-visual-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tabla }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(gpa}\SpecialCharTok{$}\NormalTok{female[gpa}\SpecialCharTok{$}\NormalTok{athlete}\SpecialCharTok{==}\ConstantTok{TRUE}\NormalTok{])}
+
+\NormalTok{etiquetas }\OtherTok{\textless{}{-}}\FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\DecValTok{100} \SpecialCharTok{*}\NormalTok{ tabla}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(tabla), }\DecValTok{2}\NormalTok{), }\StringTok{"\%"}\NormalTok{)}
+
+\FunctionTok{pie}\NormalTok{(tabla, }\AttributeTok{labels =}\NormalTok{ etiquetas, }\AttributeTok{main=}\StringTok{"Proporción de personas Atletas según el sexo"}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"HOMBRES"}\NormalTok{, }\StringTok{"MUJERES"}\NormalTok{),}
+       \AttributeTok{fill =}  \FunctionTok{c}\NormalTok{(}\StringTok{"White"}\NormalTok{, }\StringTok{"lightblue"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edumoraglez-PEC2_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+A nivel visual, vemos que la proporción de deportistas entre las mujeres
+es menor que la de los hombres.
+
+\hypertarget{pregunta-de-investigaciuxf3n-4}{%
+\subsection{Pregunta de
+investigación}\label{pregunta-de-investigaciuxf3n-4}}
+
+¿Hay más atletas entre los hombres que entre las mujeres?
+
+\hypertarget{hipuxf3tesis-nula-y-la-alternativa-4}{%
+\subsection{Hipótesis nula y la
+alternativa}\label{hipuxf3tesis-nula-y-la-alternativa-4}}
+
+H0 : Phombres \textless{} Pmujeres
+
+H1 : Phombres \textgreater{} Pmujeres
+
+donde P es la proporción de athletas
+
+\hypertarget{justificaciuxf3n-del-test-a-aplicar-3}{%
+\subsection{Justificación del test a
+aplicar}\label{justificaciuxf3n-del-test-a-aplicar-3}}
+
+Test para la diferencia de dos proporciones, para ello se calculará la
+proporción entre los hombres y mujeres, y si son deportistas o no lo
+son. Al tener dos proporciones, se compara si la primera es
+significativamente diferente de la segunda, siendo un test bilateral.
+
+\hypertarget{realizad-los-cuxe1lculos-del-test-1}{%
+\subsection{Realizad los cálculos del
+test}\label{realizad-los-cuxe1lculos-del-test-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Pob.female }\OtherTok{\textless{}{-}}\NormalTok{ gpa[gpa}\SpecialCharTok{$}\NormalTok{female}\SpecialCharTok{==}\ConstantTok{TRUE}\NormalTok{,]}
+\NormalTok{Pob.nfemale }\OtherTok{\textless{}{-}}\NormalTok{ gpa[gpa}\SpecialCharTok{$}\NormalTok{female}\SpecialCharTok{==}\ConstantTok{FALSE}\NormalTok{,]}
+\NormalTok{n1 }\OtherTok{\textless{}{-}}\FunctionTok{nrow}\NormalTok{(Pob.female)}
+\NormalTok{n2}\OtherTok{\textless{}{-}}\FunctionTok{nrow}\NormalTok{(Pob.nfemale)}
+\NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(Pob.female}\SpecialCharTok{$}\NormalTok{athlete[Pob.female}\SpecialCharTok{$}\NormalTok{athlete }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{]) }\SpecialCharTok{/}\NormalTok{ n1}
+\NormalTok{p2 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(Pob.nfemale}\SpecialCharTok{$}\NormalTok{athlete[Pob.nfemale}\SpecialCharTok{$}\NormalTok{athlete }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{]) }\SpecialCharTok{/}\NormalTok{ n2}
+
+
+\NormalTok{p}\OtherTok{\textless{}{-}}\NormalTok{ (n1}\SpecialCharTok{*}\NormalTok{p1 }\SpecialCharTok{+}\NormalTok{ n2}\SpecialCharTok{*}\NormalTok{p2) }\SpecialCharTok{/}\NormalTok{(n1}\SpecialCharTok{+}\NormalTok{n2)}
+\NormalTok{z}\OtherTok{\textless{}{-}}\NormalTok{ (p1}\SpecialCharTok{{-}}\NormalTok{p2) }\SpecialCharTok{/} \FunctionTok{sqrt}\NormalTok{( p}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{p)}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\NormalTok{n1 }\SpecialCharTok{+} \DecValTok{1}\SpecialCharTok{/}\NormalTok{n2))}
+\NormalTok{zcrit }\OtherTok{\textless{}{-}} \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.025}\NormalTok{)}
+\NormalTok{pvalue }\OtherTok{\textless{}{-}} \FunctionTok{pnorm}\NormalTok{(}\FunctionTok{abs}\NormalTok{(z),}\AttributeTok{lower.tail=}\ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{*}\DecValTok{2}
+
+
+\FunctionTok{data.frame}\NormalTok{(z, zcrit, pvalue)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           z     zcrit       pvalue
+## 1 -6.241964 -1.959964 4.321099e-10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Validación femaleando prop.test}
+\NormalTok{success }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(p1}\SpecialCharTok{*}\NormalTok{n1,p2}\SpecialCharTok{*}\NormalTok{n2)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(n1,n2)}
+\FunctionTok{prop.test}\NormalTok{( success, n, }\AttributeTok{alternative=}\StringTok{"two.sided"}\NormalTok{, }\AttributeTok{correct=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  2-sample test for equality of proportions without continuity correction
+## 
+## data:  success out of n
+## X-squared = 38.962, df = 1, p-value = 4.321e-10
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  -0.05356945 -0.02891741
+## sample estimates:
+##     prop 1     prop 2 
+## 0.02419355 0.06543698
+\end{verbatim}
+
+\hypertarget{interpretaciuxf3n-del-test-3}{%
+\subsection{Interpretación del
+test}\label{interpretaciuxf3n-del-test-3}}
+
+El valor p es 4.321e-10 y, dado que es menor que α=0.05, No estamos en
+la zona de aceptación de la hipótesis nula. Por tanto, no podemos
+afirmar que las diferencias de proporciones sean significativamente
+diferentes con un nivel de confianza del 95\%.
+
+\hypertarget{resumen-y-conclusiones}{%
+\section{Resumen y conclusiones}\label{resumen-y-conclusiones}}
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4400}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\centering
+N
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+PREGUNTA
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+RESULTADO
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+CONCLUSIÓN
+\end{minipage} \\
+\midrule()
+\endhead
+1.1 & ¿Cuál es el intervalo de confianza de la nota entre los
+estudiantes al 90\%? & El Intervalo confianza a un 90\% esta 2.637309 y
+2.670953 & El valor medio de confianza a un 90\% es de 2.654131 \\
+1.2 & ¿Cuál es el intervalo de confianza de la nota entre los
+estudiantes al 95\%? & El Intervalo confianza a un 95\% esta 2.634086 y
+2.674176 & El valor medio de confianza a un 95\% es de 2.654131 \\
+2 & ¿Ser atleta influye en la nota? & Valor Crítico al 95\% = 1.960538;
+P-Value = 3.689891e-09; Valor Observado = -5.910309 & Si, ser atleta
+influye en la nota \\
+3.1 & ¿Las mujeres obtienen mejor nota que los hombres a un nivel de
+confianza del 95\%? & Valor Crítico al 95\% = 1.960545; P-Value
+=1.704394e-12; Valor Observado = 7.078735 & En un nivel de confianza del
+95\% podemos afirmar que los hombres tienen mejor nota que las
+mujeres \\
+3.2 & ¿Las mujeres obtienen mejor nota que los hombres a un nivel de
+confianza del 90\%? & Valor Crítico al 90\% = 1.645227; P-Value =
+1.704394e-12; Valor Observado = 7.078735 & En un nivel de confianza del
+90\% podemos afirmar que los hombres tienen mejor nota que las
+mujeres \\
+4 & ¿Hay diferencias significativas en la nota según la raza? & Valor
+Crítico al 95\% = 1.960549; P-Value =1.99014e-21; Valor Observado
+=9.559319 & En un nivel de confianza del 95\% podemos afirmar que los
+estudiantes Blancos tienen mejor nota que los estudiantes Negros \\
+5 & ¿La proporción de atletas en la población es inferior al 5\%? &
+Valor Crítico al 95\% = 1.644854; P-Value = 1; Valor Observado =
+0.04689388 & En un nivel de confianza del 95\% se afirma que la
+proporción de atletas es menor al 5\% \\
+6 & ¿Hay más atletas entre los hombres que entre las mujeres? & Valor
+Crítico al 95\% = -1.959964; P-Value = 4.321099e-10; Valor Observado =
+-6.241964 & En un nivel de confianza del 95\% se afirma que la
+proporción de atletas hombres es mayor que la proporción de atletas
+mujeres \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{resumen-ejecutivo}{%
+\section{Resumen ejecutivo}\label{resumen-ejecutivo}}
+
+Para realizar el resumen ejecutivo se va a responder a todas las
+cuestiones planteadas en el enunciado:
+
+\begin{itemize}
+\item
+  \textbf{P1.1 ¿Cuál es el intervalo de confianza de la nota entre los
+  estudiantes?} El valor medio de confianza a un 90\% es de 2.654131,
+  siendo el limite inferior 2.637309 y el superior 2.670953.
+\item
+  \textbf{P1.2 ¿Cuál es el intervalo de confianza de la nota entre los
+  estudiantes?} El valor medio de confianza a un 95\% es de 2.654131,
+  siendo el limite inferior 2.634086 y el superior 2.674176
+\item
+  \textbf{P2. ¿Ser atleta influye en la nota?} Si, a un nivel de
+  confianza del 95\% podemos concluir que las personas no atletas tienen
+  mejor nota de las personas que si lo son.
+\item
+  \textbf{P3.1. ¿Las mujeres obtienen mejor nota que los hombres a un
+  nivel de confianza del 95\%?} Si, a un nivel de confianza del 95\%
+  podemos afirmar que los hombres tienen mejor nota que las mujeres.
+\item
+  \textbf{P3.2. ¿Las mujeres obtienen mejor nota que los hombres a un
+  nivel de confianza del 90\%?} Si, a un nivel de confianza del 90\%
+  podemos afirmar que los hombres tienen mejor nota que las mujeres.
+\item
+  \textbf{P4. ¿Hay diferencias significativas en la nota según la raza?}
+  Si, a un nivel de confianza del 95\% podemos afirmar que los
+  estudiantes Blancos tienen mejor nota que los estudiantes Negros.
+\item
+  \textbf{P5. ¿La proporción de atletas en la población es inferior al
+  5\%?} Si, a un nivel de confianza del 95\% se afirma que la proporción
+  de atletas es menor al 5\%
+\item
+  \textbf{P6. ¿Hay más atletas entre los hombres que entre las mujeres?}
+  Si, a un nivel de confianza del 95\% se afirma que la proporción de
+  atletas hombres es mayor que la proporción de atletas mujeres.
+\end{itemize}
+
+\end{document}

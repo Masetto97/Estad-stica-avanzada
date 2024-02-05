@@ -1,0 +1,469 @@
+---
+title: 'A3 - Modelos predictivos'
+author: "Autor: Eduardo Mora González"
+date: "Diciembre 2022"
+output:
+  html_document:
+    highlight: default
+    number_sections: yes
+    theme: cosmo
+    toc: yes
+    toc_depth: 2
+    includes:
+      in_header: 75.584-PEC-header.html
+  pdf_document:
+    highlight: zenburn
+    toc: yes
+  word_document: default
+---
+
+<style>
+body {
+text-align: justify}
+
+```{r message= FALSE, warning=FALSE}
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+if (!require('car')) install.packages('car'); library('car')
+if (!require('grid')) install.packages('grid'); library('grid')
+if (!require('corrplot')) install.packages('corrplot'); library('corrplot')
+if (!require('caret')) install.packages('caret'); library('caret')
+if (!require('plotly')) install.packages('plotly'); library('plotly')
+if (!require('rgl')) install.packages('rgl'); library('rgl')
+if (!require('scatterplot3d')) install.packages('scatterplot3d'); library('scatterplot3d')
+if (!require('pROC')) install.packages('pROC'); library('pROC')
+if (!require('lmtest')) install.packages('lmtest'); library('lmtest')
+```
+
+Carga del archivo
+
+Lo primero que hacemos es cargar el fichero:
+</style>
+```{r}
+library(readr)
+datSat_Air <- read_csv("C:/Users/eduar/Dropbox/ESTUDIOS/Estadística avanzada/PEC3/datSat_Air.csv")
+```
+
+Y mostrar los tipos de datos
+
+```{r}
+str(datSat_Air)
+```
+
+Añadimos la nueva variable del enunciado
+
+```{r}
+
+library("dplyr")
+datos_limpios <- datSat_Air
+
+datos_limpios <- datos_limpios %>% 
+  mutate(
+    satisfaction_re = case_when( 
+      satisfaction == "neutral or dissatisfied" ~ 0,
+      satisfaction == "satisfied" ~ 1,
+      TRUE ~ 0
+    )
+  )
+
+```
+
+
+# Regresión lineal
+
+## Modelo de regresión lineal (variables cuantitativas)
+
+### Variable Arrival_Delay Vs Variable Distance
+
+Diagrama de dispersión entre Arrival_Delay y Distance
+
+```{r}
+ggplot(datos_limpios, aes(x=Arrival_Delay, y=Distance)) + geom_point() + theme_light()
+```
+
+De la figura anterior se ve claramente que a medida que aumenta la distancia, la proporción de retrasos que ella ofrece decrece.
+
+La función lm se aplica con la fórmula Arrival_Delay~ Distance para indicar que precio es la variable respuesta y que maestros es la variable explicativa. Los resultados de la función lm se almacenan en el objeto mod1 para luego poder usar el modelo ajustado. La segunda línea del código mostrado abajo se usa para mostrar por pantalla un reporte sencillo del modelo ajustado.
+
+
+```{r}
+#Creamos el modelo
+mod1 <- lm(Arrival_Delay ~ Distance, data=datos_limpios)
+mod1
+
+#Tabla resumen
+summary(mod1)
+```
+
+Con la salida, se puede interpretar que, por cada incremento de distancia, se espera que el tiempo de retraso aumente en 3.850e-03. Por otro lado, si no hay incremento de distancia se espera que el tiempo promedio de retraso sea de 7.239e+00.
+
+Añadimos la recta de regresión que representa el modelo ajustado anterior
+
+```{r}
+ggplot(datos_limpios,  aes(x=Arrival_Delay, y=Distance)) + 
+  geom_point() +
+  geom_smooth(method='lm', formula=y~x, se=FALSE, col='dodgerblue1') +
+  theme_light()
+```
+
+### Variable Arrival_Delay Vs Variable Distance Vs Departure_Delay
+
+
+Diagrama de dispersión entre las variables
+
+```{r}
+plot_ly(x=datos_limpios$Arrival_Delay, y=datos_limpios$Distance, z=datos_limpios$Departure_Delay, type="scatter3d", color=datos_limpios$Arrival_Delay) %>% 
+  layout(scene = list(xaxis = list(title = 'Arrival_Delay'),
+                      yaxis = list(title = 'Distance'),
+                      zaxis = list(title = 'Departure_Delay')))
+```
+
+Se añade al modelo la nueva variable
+
+```{r}
+#Creamos el modelo
+mod2 <- lm(Arrival_Delay ~ Distance + Departure_Delay, data=datos_limpios)
+mod2
+
+#Tabla resumen
+summary(mod2)
+```
+
+Añadimos la recta de regresión que representa el modelo ajustado anterior
+
+```{r}
+mi_3d <- scatterplot3d(x=datos_limpios$Arrival_Delay, y=datos_limpios$Distance, z=datos_limpios$Departure_Delay, pch=1, cex.lab=1,
+                       highlight.3d=TRUE, type="h", xlab='Arrival_Delay',ylab='Distance', zlab='Departure_Delay')
+mi_3d$plane3d(mod2, lty.box="solid", col='mediumblue')
+```
+
+Con la salida, se puede interpretar que, por cada incremento de distancia, se espera que el tiempo de retraso aumente en 9.530e-05, y por cada incremento de retraso de salida el tiempo de retraso aumente en 9.761e-01. Por otro lado, si no hay incremento de distancia ni incremento en el tiempo de salida se espera que el tiempo promedio de retraso sea de 6.030e-01.
+
+Comparando los dos modelos, nos damos cuenta de que el modelo actual tiene un coeficiente de determinación del 0.9227 mientras que el otro modelo tenía un coeficiente de determinación del 0.012, con estos datos nos damos cuenta que el ultimo modelo es significativamente mejor ya que aporta mayor número de variables al modelo y este se acerca más a 1 (100%) que daría lugar a un buen modelo.
+
+
+## Modelo de regresión lineal (variables cuantitativas y cualitativas)
+
+### Variable Arrival_Delay Vs Variable Distance + Departure_Delay + Service + Food_drink + satisfaction + Customer_Type
+
+```{r}
+#Creamos el modelo
+mod3 <- lm(Arrival_Delay ~ Distance + Departure_Delay + Service + Food_drink + satisfaction + Customer_Type, data=datos_limpios)
+mod3
+
+#Tabla resumen
+summary(mod3)
+```
+
+Nos damos cuenta de que el modelo actual tiene un coeficiente de determinación del 0.9228 casi igual que el modelo anterior. A nivel de variables significativas, nos damos cuenta al observar el P-valor que todas son significativas a excepción de Food_drink que no lo es
+
+```{r}
+#Creamos el modelo
+ModelF <- lm(Arrival_Delay ~ Distance + Departure_Delay + Service + satisfaction, data=datos_limpios)
+
+#Tabla resumen
+summary(ModelF)
+```
+
+Al crear este nuevo modelo, solamente con las variables significativas nos damos cuenta de que la variable omitida no era necesaria ya que el coeficiente de determinación es el mismo que el modelo anterior.
+
+
+### colinealidad del modelo ModelF
+
+Para comprobar la colinealidad de dicho modelo se va a crear las correlaciones que existen entre la variables de dicho modelo
+
+```{r}
+
+#Copiamos los datos en un nuevo data frame
+
+Distance <- datos_limpios$Distance
+Departure_Delay <- datos_limpios$Departure_Delay
+Service <- datos_limpios$Service
+satisfaction_re <- datos_limpios$satisfaction_re #se añade la nueva variable creada antes para poder aplicar la correlacion de esta variable
+
+datos_ModelF<-data.frame(Distance,Departure_Delay,Service,satisfaction_re)
+
+#Calculamos la correlaciones
+correlacion <- cor(datos_ModelF)
+correlacion
+corrplot(correlacion, method = "pie")
+
+```
+
+Aunque a simple viste no existe mucha correlación entre las variables, para asegurarnos calcularemos el VIF del modelo
+
+```{r}
+vif_values <- vif(ModelF)
+vif_values
+```
+
+Tras ver el resultado, nos damos que no existe colinealidad en dicho modelo.
+
+## Diagnosis del modelo
+
+Analizamos los residuos del modelo
+
+```{r}
+confint(ModelF)
+```
+
+```{r}
+influencePlot(ModelF)
+```
+
+Con este grafico y su salida, nos damos cuenta de que tenemos 6 datos atípicos.
+
+Relación lineal entre los predictores numéricos y la variable dependiente:
+
+```{r}
+ggplot(data = datos_limpios, aes(x = Arrival_Delay, y = ModelF$residuals)) +
+geom_point() +
+geom_smooth(color = "firebrick") +
+geom_hline(yintercept = 0) +
+theme_bw()
+```
+
+Se satisface la condición de linealidad.
+
+Distribución normal de los residuos:
+
+```{r}
+qqnorm(ModelF$residuals)
+qqline(ModelF$residuals)
+```
+
+La condición de normalidad se satisface.
+
+Variabilidad constante de los residuos:
+
+```{r}
+ggplot(data = data.frame(predict_values = predict(ModelF),
+                         residuos = residuals(ModelF)),
+       aes(x = predict_values, y = residuos)) +
+    geom_point() +
+    geom_smooth(color = "firebrick", se = FALSE) +
+    geom_hline(yintercept = 0) +
+    theme_bw()
+```
+
+Se satisface la variabilidad constante
+
+## Predicción del modelo
+
+```{r }
+datos <- data.frame(Distance=2500,
+                    Departure_Delay=30,
+                    Service=3,
+                    satisfaction="satisfied")
+cat('El retraso previsto según las caracteristicas introducidos es de:', predict(object=ModelF, newdata=datos), 'minutos.')
+```
+
+# Regresión logística
+
+Hacemos una copia de los datos originales y creamos la nueva variable
+
+```{r}
+datos_RL <- datSat_Air
+
+library("dplyr")
+
+datos_RL <- datos_RL %>% 
+  mutate(
+    satisfaction_re = case_when( 
+      satisfaction == "neutral or dissatisfied" ~ 0,
+      satisfaction == "satisfied" ~ 1,
+      TRUE ~ 0
+    )
+  )
+
+```
+
+## Generación de los conjuntos de entrenamiento y de test
+
+
+```{r }
+set.seed(1000)
+traindataset <- createDataPartition(datos_RL$satisfaction_re, p=0.8, list = FALSE)
+testdf <- datos_RL[-traindataset,]
+```
+
+## Estimación del modelo con el conjunto de entrenamiento e interpretación
+
+###Estimación el modelo de regresión logística
+
+```{r}
+logitmodel <- glm(satisfaction_re ~ Gender + Customer_Type + Age + Type_Travel + Class + Distance + Seat_comfort + Food_drink + Gate + Wifi + Ent + Ease_booking + Service + Baggage_handling + Cleanliness + Online_boarding + Departure_Delay + Arrival_Delay, data = datos_RL[traindataset,], family = binomial)
+
+summary(logitmodel)
+
+```
+
+### colinealidad del modelo
+
+Para comprobar la colinealidad de dicho modelo se va a comprobar con la función VIF
+
+```{r}
+vif_values_logi <- vif(logitmodel)
+vif_values_logi
+```
+
+Tras ver el resultado, nos damos que si existe colinealidad en algunas variables, ya que tienen un valor GVIF por encima de 4
+
+### Creación del modelo ModlgF
+
+Para la selección de las variables, solamente cogeremos las que tengan un GVIF inferior a 4
+
+```{r}
+ModlgF <- glm(satisfaction_re ~ Gender + Customer_Type + Age + Type_Travel + Class + Distance + Seat_comfort + Food_drink + Gate + Wifi + Ent + Ease_booking + Service + Baggage_handling + Cleanliness + Online_boarding, data = datos_RL[traindataset,], family = binomial)
+
+summary(ModlgF)
+```
+Nos damos cuenta de que todas las variables excepto Gate y Wifi tiene influencia similar al tener el mismo p-value. Respecto a las otras dos, tienen un valor mas grande que las otras, pero con bastante influencia.
+
+Referente al tipo de variables, como toda se encuentran por encima de 1, podemos decir que son variables de riesgos.
+
+## Cálculo de las OR (Odds-Ratio)
+
+los odds asociados de las variables explicativas:
+
+```{r}
+exp(ModlgF$coefficients)
+```
+
+Los intervalos de confianza del 95% de las variables son:
+
+```{r}
+confint.default(ModlgF)
+```
+
+```{r}
+cat ('Si cambiamos el Gender, la satisfacción cambia en un:', exp(ModlgF$coefficients[2]), '\n')
+cat ('Si cambiamos el Customer_Type, la satisfacción cambia en un:', exp(ModlgF$coefficients[3]), '\n')
+cat ('Si cambiamos el tipo de Ent, la satisfacción cambia en un:', exp(ModlgF$coefficients[13]), '\n')
+cat ('Si cambiamos la  Class Eco, la satisfacción cambia en un:', exp(ModlgF$coefficients[6]), '\n')
+cat ('Si cambiamos la Class Plus, la satisfacción cambia en un:', exp(ModlgF$coefficients[7]), '\n')
+```
+
+## Matriz de confusión
+
+Creamos la matriz de confusión de los datos de test
+
+```{r}
+testdataset <- testdf
+
+predicted_value <- predict(ModlgF,newdata = testdataset,type = "response")
+predicted_class <- ifelse(predicted_value>=0.5, 1,0)
+performance_data<-data.frame(observed=testdataset$satisfaction_re,predicted= predicted_class)
+positive <- sum(performance_data$observed==1)
+negative <- sum(performance_data$observed==0)
+predicted_positive <- sum(performance_data$predicted==1)
+predicted_negative <- sum(performance_data$predicted==0)
+total <- nrow(performance_data)
+data.frame(positive, negative,predicted_positive,predicted_negative)
+```
+
+Calculamos la distribución de Falsos Positivos, Falsos negativos … 
+
+```{r}
+tp<-sum(performance_data$observed==1 & performance_data$predicted==1)
+tn<-sum(performance_data$observed==0 & performance_data$predicted==0)
+fp<-sum(performance_data$observed==0 & performance_data$predicted==1)
+fn<-sum(performance_data$observed==1 & performance_data$predicted==0)
+data.frame(tp,tn,fp,fn)
+```
+
+Analizamos los resultados con distintas medidas
+
+```{r}
+accuracy <- (tp+tn)/total
+error_rate <- (fp+fn)/total
+sensitivity <- tp/positive
+especificity <- tn/negative
+precision <- tp/predicted_positive
+npv <- tn / predicted_negative
+data.frame(accuracy,error_rate,sensitivity,especificity,precision,npv)
+```
+
+Entre los resultados de las medias obtenidas, podemos destacar que el nivel de precisión del modelo es del 84,38%. Respecto a la sensibilidad un 84,7% siendo bastante alto el nivel de predicción de positivos.
+
+Por otro lado, la identificación de verdaderos negativos o especificidad es del 80,85%, también siendo un valor bastante alto del modelo de predicción.
+
+## Predicción
+
+```{r}
+datos_pred <- datos_RL[3,]
+prob_nuevo <- predict(ModlgF, datos_pred, type="response")
+cat('La probabilidad de que el cliente encuestado número tres estuviera satisfecho con la aerolínea es del',  prob_nuevo*100 , '%'  )
+
+```
+
+## Bondad del ajuste
+
+### Devianza
+
+```{r}
+modelo.null <- glm(satisfaction_re ~ 1,data = datos_RL[traindataset,], family = binomial)
+anova(modelo.null, ModlgF)
+```
+
+Como se puede comprobar la devianza residual es menor que la devianza nula.
+
+### Chi-cuadrado
+
+```{r}
+dev <- ModlgF$deviance
+nullDev <- ModlgF$null.deviance
+modelChi <- nullDev - dev
+cat('El valor de Chi-cuadrado es: ', modelChi , ' al ser distinto a 0, se rechaza la hipótesis  nula' )
+```
+
+```{r}
+chigl <- ModlgF$df.null - ModlgF$df.residual
+chisq.prob <- 1 - pchisq(modelChi, chigl)
+
+cat('La probabilidad asociada al estadístico es: ', chisq.prob , ',como la probabilidad es menor que 0.05, podemos rechazar la hipótesis nula' )
+```
+
+## Curva ROC
+
+```{r results = 'hide'}
+glm_response_scores <- predict(ModlgF, testdf, type = "response")
+roc_obj <- roc(performance_data$observed, performance_data$predicted)
+auc(roc_obj)
+plot(roc(performance_data$observed, glm_response_scores), col="blue", lwd=3, main="Curva ROC de ModlgF")
+```
+
+Las curvas ROC se utilizan para analizar como de bien nuestro modelo separa casos positivos de negativos y para identificar el umbral más adecuado. El area de la curva ROC para este modelo es de 0.8278, lo que se aproxima mas a 1 que a 0,5 por lo que se trata de un buen modelo.
+
+# Informe Ejecutivo
+
+## Presentación de los principales resultados del estudio en una tabla
+
+| Modelo Regresión | Apartado | Observaciones|
+|:---:|:-:|:-----|
+|RL: Arrival_Delay ~ Distance| 1.1 | Modelo con un coeficiente de determinación del 1,2% en donde si no hay incremento de distancia se espera que el tiempo promedio de retraso sea de 7.239 minutos|
+|RL: Arrival_Delay ~ Distance + Departure_Delay | 1.1 | Modelo con un coeficiente de determinación del 92,2% lo que lo convierte en un buen modelo|
+|RL: ModelF ~ Distance + Departure_Delay + Service + satisfaction  + Customer_Type | 1.2 | Modelo con un coeficiente de determinación del 92,28% inicialmente tenia más variables, pero tras comprobar la colinealidad se han descartdo algunas|
+|RL: ModelF | 1.2 | Modelo con un coeficiente de determinación del 92,28% inicialmente tenia más variables, pero tras comprobar la colinealidad se han descartdo algunas|
+|RL: ModelF | 1.3 | Con el diagnóstico del modelo vemos que tenemos 6 valores atípicos, pero satisface la condición de linealidad y normalidad|
+|RL: ModelF | 1.4 | El modelo ha predicho que si con una distancia de 2500 millas, con un tiempo de retraso de 30 minutos, una calidad del servicio puntuado con un 3 el retraso será de 29,83 minutos|
+|ModlgF: satisfaction_re ~ Gender + Customer_Type + Age + Type_Travel + Class + Distance + Seat_comfort + Food_drink + Gate + Wifi + Ent + Ease_booking + Service + Baggage_handling + Cleanliness + Online_boarding  | 2.2 | El modelo inicial se ha hecho con todas las variables, pero tras comprobar la colinealidad se han quitado dos de ellas ( Departure_Delay  y Arrival_Delay)|
+|ModlgF | 2.4 | Entre los resultados de las medias obtenidas, podemos destacar que el nivel de precisión del modelo es del 84,38%. Respecto a la sensibilidad un 84,7% siendo bastante alto el nivel de predicción de positivos. Por otro lado, la identificación de verdaderos negativos o especificidad es del 80,85%, también siendo un valor bastante alto del modelo de predicción|
+| ModlgF | 2.6 | La bondad de ajuste con la Devianza y chi-cuadrado ha descartado la hipótesis nula|
+| ModlgF | 2.7 | El valor de la curva ROC es 0.8278, al estar por encima de 0.5 y muy cercano a 1 se ve que es un buen modelo|
+
+
+## Resúmen ejecutivo. Conclusiones del análisis
+
+En este estudio sobre regresión lineal y logística, se han creado dos modelos finales, uno para cada tipo, aunque para llegar a estos se ha realizado varias pruebas con otros modelos intermedios.
+
+Si nos centramos en los modelos de regresión lineal, donde se quería comprobar la relación del resto de variables con que un avión llegue con retraso, se ha creado un primer modelo, en donde se enfrentaba el tiempo de retraso con la distancia que recorre el avión, dicho modelo tenia un coeficiente de determinación del 1,2% y en donde si no hay incremento de distancia se espera que el tiempo promedio de retraso sea de 7.239 minutos, pero al tener un coeficiente muy bajo significa que se necesitaba añadir más variables.
+
+En el segundo modelo de regresión lineal, se ha añadido a las variables de antes la variable Departure_Delay, donde se ha aumentado el coeficiente de determinación a un 92,2%, pero al tener 21 variables y solo usar 3, se ha querido crear otro modelo llamado ModelF en la que después de comprobar colinealidad de algunas de sus variables se ha quedado con las siguientes: Distance, Departure_Delay,  Service, satisfaction y Customer_Type. Este modelo, tiene un coeficiente de determinación del 92,28% y tras añadir valores a los parámetros, se ha hecho una estimación del tiempo de retraso que tiene un avión según el valor de las otra variables.
+
+Si ahora nos centramos en el modelo de regresión logística, se ha añadido una variable llamada satisfaction_re obtenida a partir de la variable satisfaction, dicha variable será el campo objetivo de la predicción que se quiere obtener.
+
+El modelo, llamado ModlgF inicialmente tenia todas la variables, pero tras ver la colinealidad de la variables, se han descartado Departure_Delay y Arrival_Delay por tener un GVIF superior a 10.
+
+ModlgF tiene un nivel de precisión del modelo es del 84,38%. Respecto a la sensibilidad un 84,7% y respecto a la identificación de verdaderos negativos o especificidad es del 80,85%, lo que lo convierte en un buen modelo de predicción.
+
